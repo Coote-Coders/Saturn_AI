@@ -21,6 +21,9 @@
     <EnableUnmanagedDebugging>false</EnableUnmanagedDebugging>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="application_database.py">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="email_database.py">
       <SubType>Code</SubType>
     </Compile>
