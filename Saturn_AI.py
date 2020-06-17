@@ -37,8 +37,6 @@ parser = argparse.ArgumentParser(description="Quick Script for Extracting Weathe
 parser.add_argument("region", nargs="?", help="""Region to get weather for, must be available region.
                                     Default is your current location determined by your IP Address""", default="")
 
-OWNER = "Mister Kitchel"
-
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
 engine.setProperty('voice',voices[1].id)
@@ -109,6 +107,7 @@ search_commands = ["search", "google", "who is", "look up", "wikipedia", "tell m
 music_commands = ["music", "play", "song", "sing to me"]
 weather_commands = ["weather"]
 email_commands = ["email"]
+open_commands = ["open", "start"]
 
 
 while (1):
@@ -235,6 +234,18 @@ while (1):
             if email_commands[k] in question:
                 speak("sending email")
                 SendEmail("rcoote@microsoft.com", "Adobe Creative Cloud", "Let me know when you want to download Adobe on your machine.")
+
+            k += 1
+
+        k = 0
+        while k < len(open_commands):
+            if open_commands[k] in question:
+                speak("what would you like to open?")
+                responce = speaker_input()
+
+                if 'Adobe' in responce:
+                    speak("Opening photoshop")
+                    os.startfile("C:\Program Files\Adobe\Adobe Photoshop 2020/Photoshop.exe")
 
             k += 1
 
