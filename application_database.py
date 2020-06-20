@@ -2,7 +2,6 @@
 
 application_name = {}
 app_location = {}
-print("hello world")
 
 application_name[1] = "Chrome"
 application_name[2] = "Command Line"
@@ -31,11 +30,11 @@ app_location[6] = "C:\\ProgramData\\Microsoft\\Windows\\Start Menu\\Programs\\He
 app_location[7] = ""
 app_location[8] = ""
 app_location[9] = ""
-app_location[10] = ""
+app_location[10] = "C:\\Program Files\\Adobe\\Adobe Photoshop 2020\\Photoshop.exe"
 app_location[11] = ""
-app_location[12] = ""
-app_location[13] = ""
-app_location[14] = ""
-app_location[15] = ""
-app_location[16] = ""
-app_location[17] = "C:\Program Files\WindowsApps\Microsoft.Office.Desktop.Word_16051.12827.20268.0_x86__8wekyb3d8bbwe\Office16\\WINWORD.EXE"
+app_location[12] = "C:\\Program Files\\Adobe\\Adobe Premiere Pro 2020\\Adobe Premiere Pro.exe"
+app_location[13] = "C:\\Program Files (x86)\\StarCraft II\\StarCraft II.exe"
+app_location[14] = "C:\\Program Files (x86)\\Steam\\steam.exe"
+app_location[15] = "C:\\Users\\Nkitc\\AppData\\Roaming\\Spotify\\Spotify.exe"
+app_location[16] = "C:\\Program Files (x86)\\Microsoft Visual Studio\\2019\\Community\\Common7\\IDE\\devenv.exe"
+app_location[17] = "C:\\Program Files\\WindowsApps\\Microsoft.Office.Desktop.Word_16051.12827.20268.0_x86__8wekyb3d8bbwe\Office16\\WINWORD.EXE"
