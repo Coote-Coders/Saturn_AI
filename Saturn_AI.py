@@ -18,8 +18,6 @@ from email_database import email_list
 from application_database import app_location
 from application_database import application_name
 
-os.startfile(app_location[8])
-
 USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36"
 LANGUAGE = "en-US,en;q=0.5"
 
@@ -116,7 +114,7 @@ search_commands = ["search", "google", "who is", "look up", "wikipedia", "tell m
 music_commands = ["music", "play", "song", "sing to me"]
 weather_commands = ["weather"]
 email_commands = ["email"]
-open_commands = ["open", "start"]
+open_commands = ["open", "start", "launch"]
 
 
 while (1):
@@ -249,12 +247,18 @@ while (1):
         k = 0
         while k < len(open_commands):
             if open_commands[k] in question:
-                speak("what would you like to open?")
+                speak("What would you like to open?")
                 responce = speaker_input()
+                print(responce)
 
-                if 'Adobe' in responce:
-                    speak("Opening photoshop")
-                    os.startfile("C:\Program Files\Adobe\Adobe Photoshop 2020/Photoshop.exe")
+                i = 0
+                while i < len(application_name):
+                    if application_name[i] in responce:
+                        speak("Opening")
+                        os.startfile(app_location[i])
+                
+                    i += 1
+
 
             k += 1
 
