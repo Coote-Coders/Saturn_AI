@@ -1,16 +1,19 @@
-import speech_recognition as sr
+#Imported libraries that are used
+import os
 import pyaudio
+import smtplib
 import pyttsx3
+import requests
+import argparse
 import datetime
 import wikipedia
 import webbrowser
+import speech_recognition as sr
 import win32com.client as win32
-import os
-import smtplib
-import argparse
-import requests
+from urllib.request import urlopen
 from bs4 import BeautifulSoup as bs
 
+#These are imported files to access varibles stored in those files
 import email_database
 import application_database
 from email_database import email_person
@@ -18,9 +21,11 @@ from email_database import email_list
 from application_database import app_location
 from application_database import application_name
 
+#Something to do with the weather application, not really sure
 USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36"
 LANGUAGE = "en-US,en;q=0.5"
 
+#Weather function to process weather location
 def get_weather_data(url):
     session = requests.Session()
     session.headers['User-Agent'] = USER_AGENT
@@ -40,21 +45,24 @@ def get_weather_data(url):
 
     return result
 
+#Used to pass arguments through the command line, get rid of later
 parser = argparse.ArgumentParser(description="Quick Script for Extracting Weather data using Google Weather")
 parser.add_argument("region", nargs="?", help="""Region to get weather for, must be available region.
                                     Default is your current location determined by your IP Address""", default="")
 
+#Set voice settings, and properties of voice features
 engine = pyttsx3.init('sapi5')
 voices = engine.getProperty('voices')
 engine.setProperty('voice',voices[1].id)
 engine.setProperty('rate', 160)
 engine.setProperty('volume', 1.0)
 
-
+#Function that speaks text passed to the function
 def speak(text):
     engine.say(text)
     engine.runAndWait()
 
+#Fuction for startup, says a welcome greeting
 def startup_statement():
     hour = int(datetime.datetime.now().hour)
     
@@ -65,10 +73,12 @@ def startup_statement():
 
     speak("What can my services provide?")
 
+#Function waits in the background looking for a wakeup phrase
 def waiting_command():
     r = sr.Recognizer()
 
     with sr.Microphone() as source:
+        #Inside a try becuase it throughs an exception when if fails
         try:
             r.adjust_for_ambient_noise(source, duration=5)
             print("Waiting...")
@@ -82,6 +92,7 @@ def waiting_command():
 
         return speaker
 
+#The function returns the words spoken into the function
 def speaker_input():
     r = sr.Recognizer()
 
@@ -98,6 +109,7 @@ def speaker_input():
 
     return speaker
 
+#Function to send basic email, no attachments yet
 def SendEmail(emailAddress, subject, message):
     outlook = win32.Dispatch('outlook.application')
     mail = outlook.CreateItem(0)
@@ -106,9 +118,9 @@ def SendEmail(emailAddress, subject, message):
     message = message.encode("raw_unicode_escape")
     message = message.decode("unicode_escape")
     mail.Body = message
-    # Attach a file    
     mail.Send()
 
+#Varibles to store keywords that the program looks for
 quit_commands = ["quit", "stop", "terminate", "kill yourself", "end", "shut down"]
 search_commands = ["search", "google", "who is", "look up", "wikipedia", "tell me about"]
 music_commands = ["music", "play", "song", "sing to me"]
@@ -116,16 +128,20 @@ weather_commands = ["weather"]
 email_commands = ["email"]
 open_commands = ["open", "start", "launch"]
 
-
+#Main loop in program
 while (1):
+    #Calls function and stores any input into a varible
     running_in_back = waiting_command()
 
+    #Checks to see if quit commands were said
     k = 0
     while k < len(quit_commands):
         if quit_commands[k] in running_in_back:
             exit(0)
         k += 1       
 
+    #Checks to see if program should activate
+    #All remaining while loops look for keywords stored in the varibles
     if 'Saturn' in running_in_back:
         startup_statement()
         question = speaker_input()
@@ -234,8 +250,6 @@ while (1):
 
             k += 1
 
-
-
         k = 0
         while k < len(email_commands):
             if email_commands[k] in question:
@@ -259,14 +273,14 @@ while (1):
                 
                     i += 1
 
-
             k += 1
 
-
-#to install using pip the command is:
-#python -m pip install SpeechRecognition
-#python -m pip install pipwin
-#python -m pipwin install pyaudio
-#pip install pyttsx3==2.6
-#pip install wikipedia
-#We need these libraries to use the speech libraries
+#Many of these libraries were installed using 'pip'
+#You can install through command line or through Visual Studio
+#To install using the command line:
+    #python -m pip install 'library used'
+#We are using an older version of one library
+    #Type: python -m pip install pyttsx3==2.6
+#To install using Visual Studio open the 'Python Environments' explorer
+#Search for it at the top if you can't find it
+#Then search PyPi for the library to see if it is installed already
