@@ -127,6 +127,7 @@ music_commands = ["music", "play", "song", "sing to me"]
 weather_commands = ["weather"]
 email_commands = ["email"]
 open_commands = ["open", "start", "launch"]
+stock_commands = ["stocks", "money", "bonds"]
 
 #Main loop in program
 while (1):
@@ -222,17 +223,11 @@ while (1):
         k = 0
         while k < len(weather_commands):
             if weather_commands[k] in question:
-
                 URL = "https://www.google.com/search?lr=lang_en&ie=UTF-8&q=weather"
-                
                 speak("Please say the city where you want the weather from")
-                
                 location = speaker_input()
-
                 URL += "-" + location
-
                 print(URL)
-                
                 data = get_weather_data(URL)
 
                 speak("Weather in:" + data["region"])
@@ -283,6 +278,16 @@ while (1):
                     i += 1
 
             k += 1
+
+        k = 0
+        while k < len(stock_commands):
+            if stock_commands[k] in question:
+                speak("What stock would you like to look at?")
+                stock = speaker_input()
+                #need a list to check stock against
+                #then needed stored URL to search at.
+                #Or maybe we can append the name of the stock onto one URL,
+                #trye both and see what happens.
 
 #Many of these libraries were installed using 'pip'
 #You can install through command line or through Visual Studio
