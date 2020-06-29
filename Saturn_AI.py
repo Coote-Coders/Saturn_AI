@@ -253,8 +253,17 @@ while (1):
         k = 0
         while k < len(email_commands):
             if email_commands[k] in question:
-                speak("sending email")
-                SendEmail("rcoote@microsoft.com", "Adobe Creative Cloud", "Let me know when you want to download Adobe on your machine.")
+                speak("Who would you like to send an email to?")
+                answer = speaker_input()
+
+                i = 0
+                while i < len(email_person):
+                    if email_person[i] in answer:
+                        speak("Ok, what will the subject be")
+                        subject = speaker_input()
+                        speak("Ok, what will the email say?")
+                        message = speaker_input()
+                        SendEmail(email_person[i], subject, message)
 
             k += 1
 
