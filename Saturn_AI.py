@@ -16,10 +16,13 @@ from bs4 import BeautifulSoup as bs
 #These are imported files to access varibles stored in those files
 import email_database
 import application_database
+import stock_database
 from email_database import email_person
 from email_database import email_list
 from application_database import app_location
 from application_database import application_name
+from stock_database import stock_name
+from stock_database import stock_symbol
 
 #Something to do with the weather application, not really sure
 USER_AGENT = "Mozilla/5.0 (X11; Linux x86_64) AppleWebKit/537.36 (KHTML, like Gecko) Chrome/44.0.2403.157 Safari/537.36"
@@ -292,7 +295,15 @@ while (1):
                 speak("What stock would you like to look at?")
                 stock = speaker_input()
                 print(stock)
-                #"Apple"
+                
+                i = 0
+                while i < len(stock_name):
+                    if stock_name[i] in stock:
+                        price = stock_price(stock_name)
+                        speak(price)
+
+                    i += 1
+
                 #need a list to check stock against
                 #then needed stored URL to search at.
                 #Or maybe we can append the name of the stock onto one URL,
