@@ -120,6 +120,13 @@ def SendEmail(emailAddress, subject, message):
     mail.Body = message
     mail.Send()
 
+def stock_price(url):
+    stock_website = "https://finance.yahoo.com/quote/AAPL"
+    page = urlopen(stock_website)
+    soup = bs4.BeautifulSoup(page,"html.parser")
+    price = soup.find('div',{'class': 'My(6px) Pos(r) smartphone_Mt(6px)'}).find('span').text
+    return price
+
 #Varibles to store keywords that the program looks for
 quit_commands = ["quit", "stop", "terminate", "kill yourself", "end", "shut down"]
 search_commands = ["search", "google", "who is", "look up", "wikipedia", "tell me about"]
@@ -127,7 +134,7 @@ music_commands = ["music", "play", "song", "sing to me"]
 weather_commands = ["weather"]
 email_commands = ["email"]
 open_commands = ["open", "start", "launch"]
-stock_commands = ["stocks", "money", "bonds"]
+stock_commands = ["stocks", "stock", "money", "bonds"]
 
 #Main loop in program
 while (1):
@@ -284,10 +291,14 @@ while (1):
             if stock_commands[k] in question:
                 speak("What stock would you like to look at?")
                 stock = speaker_input()
+                print(stock)
+                #"Apple"
                 #need a list to check stock against
                 #then needed stored URL to search at.
                 #Or maybe we can append the name of the stock onto one URL,
-                #trye both and see what happens.
+                #try both and see what happens.
+
+            k += 1
 
 #Many of these libraries were installed using 'pip'
 #You can install through command line or through Visual Studio
