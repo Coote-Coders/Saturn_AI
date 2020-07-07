@@ -1,6 +1,4 @@
 #Imported libraries that are use
-#test
-#test 2
 import os
 import pyaudio
 import smtplib
