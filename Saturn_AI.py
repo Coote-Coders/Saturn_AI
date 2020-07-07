@@ -1,5 +1,4 @@
 #Imported libraries that are use
-#Roger was here
 import os
 import pyaudio
 import smtplib
