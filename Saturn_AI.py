@@ -123,8 +123,10 @@ def SendEmail(emailAddress, subject, message):
     mail.Body = message
     mail.Send()
 
+#Function to determine the stock value of a given stock
 def stock_price(url):
-    stock_website = "https://finance.yahoo.com/quote/AAPL"
+    stock_website = "https://finance.yahoo.com/quote/"
+    stock_website = stock_website + url
     page = urlopen(stock_website)
     soup = bs4.BeautifulSoup(page,"html.parser")
     price = soup.find('div',{'class': 'My(6px) Pos(r) smartphone_Mt(6px)'}).find('span').text
@@ -301,6 +303,7 @@ while (1):
                     if stock_name[i] in stock:
                         price = stock_price(stock_name)
                         speak(price)
+                        print(price)
 
                     i += 1
 
@@ -310,6 +313,8 @@ while (1):
                 #try both and see what happens.
 
             k += 1
+
+
 
 #Many of these libraries were installed using 'pip'
 #You can install through command line or through Visual Studio
