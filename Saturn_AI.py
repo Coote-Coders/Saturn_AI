@@ -12,6 +12,7 @@ import speech_recognition as sr
 import win32com.client as win32
 from urllib.request import urlopen
 from bs4 import BeautifulSoup as bs
+import bs4
 
 #These are imported files to access varibles stored in those files
 import email_database
@@ -245,15 +246,9 @@ while (1):
                 speak("Weather in:" + data["region"])
                 speak("Today is" + data["dayhour"])
                 speak(f"The temperature is {data['temp_now']}" + "degrees")
-                speak("The skys are:" + data['weather_now'])
-                speak("Humidity is at" + data["humidity"])
-                speak("Wind speeds up too" + data["wind"][0] + "miles per hour")
-                print("Weather in:" + data["region"])
-                print("Today is" + data["dayhour"])
-                print(f"The temperature is {data['temp_now']}" + "degrees")
-                print("The skys are:" + data['weather_now'])
-                print("Humidity is at" + data["humidity"])
-                print("Wind speeds up too " + data["wind"][0] + " miles per hour")#issues saying the winds speed
+                speak("The skys are: " + data['weather_now'])
+                speak("Humidity is at " + data["humidity"])
+                speak("Wind speeds up too " + data["wind"][0] + " miles per hour")
 
             k += 1
 
@@ -297,24 +292,16 @@ while (1):
                 speak("What stock would you like to look at?")
                 stock = speaker_input()
                 print(stock)
-                
+
                 i = 0
                 while i < len(stock_name):
                     if stock_name[i] in stock:
-                        price = stock_price(stock_name)
-                        speak(price)
+                        price = stock_price(stock_symbol[i])
+                        speak("The price is" + price)
                         print(price)
 
                     i += 1
-
-                #need a list to check stock against
-                #then needed stored URL to search at.
-                #Or maybe we can append the name of the stock onto one URL,
-                #try both and see what happens.
-
             k += 1
-
-
 
 #Many of these libraries were installed using 'pip'
 #You can install through command line or through Visual Studio
